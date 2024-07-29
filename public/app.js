@@ -1,12 +1,3 @@
-// If you are using CommonJS modules:
-const { Dropzone } = require("dropzone");
-
-/*  */
-
-let myDropzone = new Dropzone("#my-form");
-myDropzone.on("addedfile", file => {
-  console.log(`File added: ${file.name}`);
-});
 
 window.addEventListener('load', function () {
   // document.querySelector('input[type="file"]').addEventListener('change', function() {

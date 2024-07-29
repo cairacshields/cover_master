@@ -15,9 +15,9 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.post('/enhance', upload.single('example'), (req, res) => {
+app.post('/enhance', upload.single('file'), (req, res) => {
   try {
-    const encoded = req.file.buffer.toString('base64');
+    const encoded = req.body.file.buffer.toString('base64');
     
     console.log(`🔥 We encoded the users album art!! ${encoded}`);
     res.status(200);

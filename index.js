@@ -4,7 +4,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
+const upload = multer({ })
 const http = require('http');
 
 let port = process.env.PORT;
@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 
 app.post('/enhance', upload.any(), (req, res) => {
   try {
-    const encoded = req.files[0].buffer.toString('base64');;
+    const encoded = req.files[0].buffer.toString('base64');
     
     console.log(`🔥 We encoded the users album art!! ${encoded}`);
     res.status(200);

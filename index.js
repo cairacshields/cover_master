@@ -13,8 +13,19 @@ app.get('/', (req, res) => {
 });
 
 app.get('/enhance', upload.single('example'), (req, res) => {
-  const encoded = req.file.buffer.toString('base64')
-  console.log(`🔥 We encoded the users album art!! ${encoded}`)
+  try {
+    const encoded = req.file.buffer.toString('base64');
+    
+    console.log(`🔥 We encoded the users album art!! ${encoded}`);
+    res.status(200);
+    res.send("Success from CoverMaster...");
+
+  } catch (e) {
+    console.error(e);
+    res.status(400);
+    res.send(`ERR from CoverMaster ${e}`);
+  }
+
 });
 
 

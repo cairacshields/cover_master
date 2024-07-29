@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/enhance', upload.single('example'), (req, res) => {
+app.post('/enhance', upload.single('example'), (req, res) => {
   try {
     const encoded = req.file.buffer.toString('base64');
     

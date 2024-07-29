@@ -7,6 +7,17 @@ const multer  = require('multer')
 const upload = multer({ })
 const http = require('http');
 
+
+var ImageKit = require("imagekit");
+
+var imagekit = new ImageKit(
+  {
+    publicKey:"public_CeXqnuFk23VHkwNzR4wKDCsiDqM=",
+    privateKey: "private_2wXXd7p0CM******************",
+    urlEndpoint:"https://ik.imagekit.io/mzeusi9wb"
+  }
+);
+
 let port = process.env.PORT;
 
 app.use(express.static(__dirname + 'public'));

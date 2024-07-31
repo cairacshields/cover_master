@@ -6,6 +6,9 @@ app.use(bodyParser.json())
 const multer  = require('multer')
 const upload = multer({ })
 const http = require('http');
+const axios = require('axios');
+const jwt = require('jsonwebtoken');
+const FormData = require('form-data');
 
 
 var ImageKit = require("imagekit");
@@ -20,6 +23,27 @@ var imagekit = new ImageKit(
 
 let port = process.env.PORT;
 
+/*
+  Region - PHOSUS
+*/
+// replace with your API key here
+const apiKey = '14320c068537b6b9e94f9076ecdb61ca';
+// replace with your key ID here
+const ackeyId = 690;
+
+// create JWT with payload
+const jwtToken = jwt.sign(
+  {
+    account_key_id: ackeyId,
+    exp: Math.floor(Date.now() / 1000) + (60 * 60), // 1 hour expiry
+    iat: Math.floor(Date.now() / 1000)
+  },
+  apiKey,
+  { algorithm: 'HS256' }
+);
+
+// end region
+
 app.use(express.static(__dirname + 'public'));
 
 app.get('/', (req, res) => {
@@ -29,6 +53,22 @@ app.get('/', (req, res) => {
 app.post('/enhance', upload.any(), (req, res) => {
   try {
     const encoded = req.files[0].buffer.toString('base64');
+
+    (async () => {
+      const imgFilePath = ...; // YOUR IMAGE FILE PATH HERE
+      const res = await axios({
+        method: 'POST',
+        url: 'https://api.phosus.com/autofix/v1',
+        headers: {
+          'authorizationToken': jwtToken,
+          'Content-Type': 'application/json'
+        },
+        data: JSON.stringify({
+          image_b64: encoded
+        })
+      });
+      console.log(res.data); // {'ok': ..., 'result': ..., 'error': ...}
+    })();
     
     console.log(`🔥 We encoded the users album art!! ${encoded}`);
     res.status(200);

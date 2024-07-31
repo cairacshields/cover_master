@@ -55,7 +55,6 @@ app.post('/enhance', upload.any(), (req, res) => {
     const encoded = req.files[0].buffer.toString('base64');
 
     (async () => {
-      const imgFilePath = ...; // YOUR IMAGE FILE PATH HERE
       const res = await axios({
         method: 'POST',
         url: 'https://api.phosus.com/autofix/v1',

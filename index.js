@@ -35,34 +35,37 @@ app.get('/', (req, res) => {
 app.post('/enhance', upload.any(), (req, res) => {
   try {
     const encoded = req.files[0].buffer.toString('base64');
+        const imgObj = JSON.parse(JSON.stringify(req.files));
+
+    console.log(req.files);
     let formData = new FormData();
     formData.append('image', encoded);
 
-    (async () => {
-      const response = await axios({
-        method: 'POST',
-        url: 'https://app.imggen.ai/v1/upscale-image',
-        headers: {
-          'X-IMGGEN-KEY': '4d229bd9-8691-4a8a-a279-fb61e8284d82',
-          'Content-Type': 'application/json'
-        },
-        data: {
-          "image": req.files[0]
-        }
-      });
-      console.log(`🪻 Response Recieved --> ${response}`);
-      // if (response.data["ok"] == true) {
-      //   console.log(`🌶️ Phosus autofix complete successfully.... ${response.data} \n`);
-      //   if (response.data["result"]) {
-      //     console.log(`✨ Phosus result is ${response.data["result"]} \n`);
-      //     if (response.data["result"]["output"]) {
-      //       console.log(`Phosus output base64 result is ${response.data["result"]["output"]}`);
-      //       res.status(200);
-      //       res.send(response.data["result"]["output"]);
-      //     }
-      //   }
-      // }
-    })();
+    // (async () => {
+    //   const response = await axios({
+    //     method: 'POST',
+    //     url: 'https://app.imggen.ai/v1/upscale-image',
+    //     headers: {
+    //       'X-IMGGEN-KEY': '4d229bd9-8691-4a8a-a279-fb61e8284d82',
+    //       'Content-Type': 'application/json'
+    //     },
+    //     data: {
+    //       "image": req.files[0]
+    //     }
+    //   });
+    //   console.log(`🪻 Response Recieved --> ${response}`);
+    //   // if (response.data["ok"] == true) {
+    //   //   console.log(`🌶️ Phosus autofix complete successfully.... ${response.data} \n`);
+    //   //   if (response.data["result"]) {
+    //   //     console.log(`✨ Phosus result is ${response.data["result"]} \n`);
+    //   //     if (response.data["result"]["output"]) {
+    //   //       console.log(`Phosus output base64 result is ${response.data["result"]["output"]}`);
+    //   //       res.status(200);
+    //   //       res.send(response.data["result"]["output"]);
+    //   //     }
+    //   //   }
+    //   // }
+    // })();
     
 
   } catch (e) {

@@ -46,7 +46,9 @@ app.post('/enhance', upload.any(), (req, res) => {
           'X-IMGGEN-KEY': '4d229bd9-8691-4a8a-a279-fb61e8284d82',
           'Content-Type': 'application/json'
         },
-        data: formData
+        data: {
+          "image": encoded
+        }
       });
       console.log(`🪻 Response Recieved --> ${response}`);
       // if (response.data["ok"] == true) {

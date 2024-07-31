@@ -36,7 +36,7 @@ app.post('/enhance', upload.any(), (req, res) => {
   try {
     const encoded = req.files[0].buffer.toString('base64');
     let formData = new FormData();
-    formData.append('file', req.files[0]);
+    formData.append('image', req.files[0]);
 
     (async () => {
       const response = await axios({

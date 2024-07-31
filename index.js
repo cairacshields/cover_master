@@ -55,7 +55,7 @@ app.post('/enhance', upload.any(), (req, res) => {
     const encoded = req.files[0].buffer.toString('base64');
 
     (async () => {
-      const res = await axios({
+      const response = await axios({
         method: 'POST',
         url: 'https://api.phosus.com/autofix/v1',
         headers: {
@@ -66,7 +66,17 @@ app.post('/enhance', upload.any(), (req, res) => {
           image_b64: encoded
         })
       });
-      console.log(res.data); // {'ok': ..., 'result': ..., 'error': ...}
+      //console.log(res.data); // {'ok': ..., 'result': ..., 'error': ...}
+      if (response.data["ok"] == true) {
+        console.log("Phosus autofix complete successfully!");
+        if (response.data["result"] != null) {
+          if (response.data["result"]["output"] != null) {
+            console.log(`Phosus output base64 result is ${response.data["result"]["output"]}`);
+            res.status(200);
+            res.send(response.data["result"]["output"]);
+          }
+        }
+      }
     })();
     
     console.log(`🔥 We encoded the users album art!! ${encoded}`);

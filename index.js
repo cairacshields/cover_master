@@ -9,7 +9,8 @@ const http = require('http');
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const FormData = require('form-data');
-import picsartfordevelopers from '@api/picsartfordevelopers';
+const request = require('request');
+
 
 
 var ImageKit = require("imagekit");
@@ -35,10 +36,22 @@ app.post('/enhance', upload.any(), (req, res) => {
   try {
     const encoded = req.files[0].buffer.toString('base64');
 
-    picsartfordevelopers.auth('eyJraWQiOiI5NzIxYmUzNi1iMjcwLTQ5ZDUtOTc1Ni05ZDU5N2M4NmIwNTEiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhdXRoLXNlcnZpY2UtYmE0ZGM2NWMtNGFhZC00ZTMxLTg3YmEtZTQ0NDNkNjQ0OWVlIiwiYXVkIjoiNDYwMTUzNDkyMDAyMTAxIiwibmJmIjoxNzIyNDU3NTMwLCJzY29wZSI6WyJiMmItYXBpLmdlbl9haSIsImIyYi1hcGkuaW1hZ2VfYXBpIl0sImlzcyI6Imh0dHBzOi8vYXBpLnBpY3NhcnQuY29tL3Rva2VuLXNlcnZpY2UiLCJvd25lcklkIjoiNDYwMTUzNDkyMDAyMTAxIiwiaWF0IjoxNzIyNDU3NTMwLCJqdGkiOiJiZmY1ZWRhNi04OTI4LTRlYzktYmRmZC0yNzc4YzhhZjVmZWYifQ.HoLGtuO6hkwlYKjT0aLLPzGo-1OwDjmyAjuQQMZbL0pzCIqyZN-ujKuWGcVbWS2Chz2MymHmPpahbBPJYaWByRwCYI2juw3aqXj8AMkpX-uAve4dacXdYE9jVou1WjZStTm4-0BHajT4WcskBrzxKm_MauxoAf-iFtupxvMo8gETzkFET5HfdqlA8uxLrp6xSLl80gotKdvfPyAb5h3DZZioJJx6eFifFMQVZtDTVasO3gKEqx8X0rRGGFgAMw9-2N9p6vnqMD6s57FpDdW78Baox25ngD3-3PMQMJsvMY4cnxNeo29s2J0BJDoXzy7hh7Yyni3gmfwwSWAtTdwelg');
-    picsartfordevelopers.postUpscaleEnhance({upscale_factor: '2', format: 'JPG'})
-      .then(({ data }) => console.log(data))
-      .catch(err => console.error(err));
+    const options = {
+      method: 'POST',
+      url: 'https://api.picsart.io/tools/1.0/upscale/enhance',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'multipart/form-data; boundary=---011000010111000001101001',
+        'X-Picsart-API-Key': 'eyJraWQiOiI5NzIxYmUzNi1iMjcwLTQ5ZDUtOTc1Ni05ZDU5N2M4NmIwNTEiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhdXRoLXNlcnZpY2UtYmE0ZGM2NWMtNGFhZC00ZTMxLTg3YmEtZTQ0NDNkNjQ0OWVlIiwiYXVkIjoiNDYwMTUzNDkyMDAyMTAxIiwibmJmIjoxNzIyNDU3NTMwLCJzY29wZSI6WyJiMmItYXBpLmdlbl9haSIsImIyYi1hcGkuaW1hZ2VfYXBpIl0sImlzcyI6Imh0dHBzOi8vYXBpLnBpY3NhcnQuY29tL3Rva2VuLXNlcnZpY2UiLCJvd25lcklkIjoiNDYwMTUzNDkyMDAyMTAxIiwiaWF0IjoxNzIyNDU3NTMwLCJqdGkiOiJiZmY1ZWRhNi04OTI4LTRlYzktYmRmZC0yNzc4YzhhZjVmZWYifQ.HoLGtuO6hkwlYKjT0aLLPzGo-1OwDjmyAjuQQMZbL0pzCIqyZN-ujKuWGcVbWS2Chz2MymHmPpahbBPJYaWByRwCYI2juw3aqXj8AMkpX-uAve4dacXdYE9jVou1WjZStTm4-0BHajT4WcskBrzxKm_MauxoAf-iFtupxvMo8gETzkFET5HfdqlA8uxLrp6xSLl80gotKdvfPyAb5h3DZZioJJx6eFifFMQVZtDTVasO3gKEqx8X0rRGGFgAMw9-2N9p6vnqMD6s57FpDdW78Baox25ngD3-3PMQMJsvMY4cnxNeo29s2J0BJDoXzy7hh7Yyni3gmfwwSWAtTdwelg'
+      },
+      formData: {upscale_factor: '2', format: 'JPG', image: req.files[0]}
+    };
+
+    request(options, function (error, response, body) {
+      if (error) throw new Error(error);
+
+      console.log(body);
+    });
 
     // (async () => {
     //   const response = await axios({

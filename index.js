@@ -80,9 +80,7 @@ app.post('/enhance', upload.any(), (req, res) => {
       }
     })();
     
-    console.log(`🔥 We encoded the users album art!! ${encoded}`);
-    res.status(200);
-    res.send("Success from CoverMaster...");
+    
 
   } catch (e) {
     console.error(e);

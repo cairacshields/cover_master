@@ -47,7 +47,7 @@ app.post('/enhance', upload.any(), (req, res) => {
           'Content-Type': 'application/json'
         },
         data: {
-          "image": encoded
+          "image": req.files[0]
         }
       });
       console.log(`🪻 Response Recieved --> ${response}`);

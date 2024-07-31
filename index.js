@@ -69,9 +69,9 @@ app.post('/enhance', upload.any(), (req, res) => {
       //console.log(res.data); // {'ok': ..., 'result': ..., 'error': ...}
       if (response.data["ok"] == true) {
         console.log("Phosus autofix complete successfully! \n");
-        if (response.data["result"] != null) {
+        if (response.data["result"]) {
           console.log(`✨ Phosus result is ${response.data["result"]} \n`);
-          if (response.data["result"]["output"] != null) {
+          if (response.data["result"]["output"]) {
             console.log(`Phosus output base64 result is ${response.data["result"]["output"]}`);
             res.status(200);
             res.send(response.data["result"]["output"]);
@@ -79,7 +79,6 @@ app.post('/enhance', upload.any(), (req, res) => {
         }
       }
     })();
-    
     
 
   } catch (e) {

@@ -68,8 +68,9 @@ app.post('/enhance', upload.any(), (req, res) => {
       });
       //console.log(res.data); // {'ok': ..., 'result': ..., 'error': ...}
       if (response.data["ok"] == true) {
-        console.log("Phosus autofix complete successfully!");
+        console.log("Phosus autofix complete successfully! \n");
         if (response.data["result"] != null) {
+          console.log(`✨ Phosus result is ${response.data["result"]} \n`);
           if (response.data["result"]["output"] != null) {
             console.log(`Phosus output base64 result is ${response.data["result"]["output"]}`);
             res.status(200);

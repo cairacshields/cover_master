@@ -44,7 +44,7 @@ app.post('/enhance', upload.any(), (req, res) => {
         'content-type': 'multipart/form-data; boundary=---011000010111000001101001',
         'X-Picsart-API-Key': 'eyJraWQiOiI5NzIxYmUzNi1iMjcwLTQ5ZDUtOTc1Ni05ZDU5N2M4NmIwNTEiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhdXRoLXNlcnZpY2UtYmE0ZGM2NWMtNGFhZC00ZTMxLTg3YmEtZTQ0NDNkNjQ0OWVlIiwiYXVkIjoiNDYwMTUzNDkyMDAyMTAxIiwibmJmIjoxNzIyNDU3NTMwLCJzY29wZSI6WyJiMmItYXBpLmdlbl9haSIsImIyYi1hcGkuaW1hZ2VfYXBpIl0sImlzcyI6Imh0dHBzOi8vYXBpLnBpY3NhcnQuY29tL3Rva2VuLXNlcnZpY2UiLCJvd25lcklkIjoiNDYwMTUzNDkyMDAyMTAxIiwiaWF0IjoxNzIyNDU3NTMwLCJqdGkiOiJiZmY1ZWRhNi04OTI4LTRlYzktYmRmZC0yNzc4YzhhZjVmZWYifQ.HoLGtuO6hkwlYKjT0aLLPzGo-1OwDjmyAjuQQMZbL0pzCIqyZN-ujKuWGcVbWS2Chz2MymHmPpahbBPJYaWByRwCYI2juw3aqXj8AMkpX-uAve4dacXdYE9jVou1WjZStTm4-0BHajT4WcskBrzxKm_MauxoAf-iFtupxvMo8gETzkFET5HfdqlA8uxLrp6xSLl80gotKdvfPyAb5h3DZZioJJx6eFifFMQVZtDTVasO3gKEqx8X0rRGGFgAMw9-2N9p6vnqMD6s57FpDdW78Baox25ngD3-3PMQMJsvMY4cnxNeo29s2J0BJDoXzy7hh7Yyni3gmfwwSWAtTdwelg'
       },
-      formData: {upscale_factor: '2', format: 'JPG', image: req.files[0]}
+      formData: {upscale_factor: '2', format: 'JPG', image: encoded}
     };
 
     request(options, function (error, response, body) {
